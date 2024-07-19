@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "/run/current-system/sw/share/applications"
+		},
+		{
+			"path": "/etc/profiles/per-user/elliott/share/applications"
+		}
+	],
+	"settings": {}
+}

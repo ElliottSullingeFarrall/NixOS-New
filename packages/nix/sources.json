@@ -1,0 +1,51 @@
+{
+    "jtbl": {
+        "branch": "master",
+        "description": "CLI tool to convert JSON and JSON Lines to terminal, CSV, HTTP, and markdown tables",
+        "homepage": "",
+        "owner": "kellyjonbrazil",
+        "repo": "jtbl",
+        "rev": "0018aaddf5a76cc03a761ef01b065ff2183f9d17",
+        "sha256": "1gryjfjchvfb2nv797h5ba2qz54ig5kkjwcq8ycfdffdk1931d10",
+        "type": "tarball",
+        "url": "https://github.com/kellyjonbrazil/jtbl/archive/0018aaddf5a76cc03a761ef01b065ff2183f9d17.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz",
+        "version": "1.6.0"
+    },
+    "rofi-mixer": {
+        "branch": "master",
+        "description": "A sound device mixer made with rofi",
+        "homepage": "",
+        "owner": "joshpetit",
+        "repo": "rofi-mixer",
+        "rev": "9944bf9dbea915f0ecaf3163fff94f5f6d53a88c",
+        "sha256": "0wkmw2rsz0ls1wcmnb3n6k3cs5k1w3yk8dlaxqc41myan0cf0644",
+        "type": "tarball",
+        "url": "https://github.com/joshpetit/rofi-mixer/archive/9944bf9dbea915f0ecaf3163fff94f5f6d53a88c.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "rofi-network-manager": {
+        "branch": "master",
+        "description": "A manager for network connections using bash, rofi, nmcli,qrencode. ",
+        "homepage": "",
+        "owner": "P3rf",
+        "repo": "rofi-network-manager",
+        "rev": "19a3780fa3ed072482ac64a4e73167d94b70446b",
+        "sha256": "03bizzfp2ibzaz9yc38svknk4ikz14pczv4qzmj0yzmh5vx2mbmh",
+        "type": "tarball",
+        "url": "https://github.com/P3rf/rofi-network-manager/archive/19a3780fa3ed072482ac64a4e73167d94b70446b.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "rofi-wifi-menu": {
+        "branch": "master",
+        "description": "A bash script using nmcli and rofi to make a wifi menu for your favorite window manager",
+        "homepage": "",
+        "owner": "ericmurphyxyz",
+        "repo": "rofi-wifi-menu",
+        "rev": "d6debde6e302f68d8235ced690d12719124ff18e",
+        "sha256": "0vjl2js3qznnsqik6i86xzq7hpcrw8g3rqdi30536j4ws52w3sqz",
+        "type": "tarball",
+        "url": "https://github.com/ericmurphyxyz/rofi-wifi-menu/archive/d6debde6e302f68d8235ced690d12719124ff18e.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

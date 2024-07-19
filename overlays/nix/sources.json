@@ -1,0 +1,38 @@
+{
+    "kmscon": {
+        "branch": "develop",
+        "description": "Linux KMS/DRM based virtual Console Emulator",
+        "homepage": "http://www.freedesktop.org/wiki/Software/kmscon",
+        "owner": "Aetf",
+        "repo": "kmscon",
+        "rev": "0f73dc37ef67f809b30c835ed1b3cafaa21804a5",
+        "sha256": "1ghxigq4wfhhwn9pihvd0y0fnl7mzsrhvx5g3y2sz2ssvsxcm9ik",
+        "type": "tarball",
+        "url": "https://github.com/Aetf/kmscon/archive/0f73dc37ef67f809b30c835ed1b3cafaa21804a5.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "libtsm": {
+        "branch": "develop",
+        "description": "Terminal-emulator State Machine",
+        "homepage": null,
+        "owner": "Aetf",
+        "repo": "libtsm",
+        "rev": "69922bde02c7af83b4d48a414cc6036af7388626",
+        "sha256": "13sidc601aacg587gbfgkwhsbl569prjqm4bphi24vlvchwkgs26",
+        "type": "tarball",
+        "url": "https://github.com/Aetf/libtsm/archive/69922bde02c7af83b4d48a414cc6036af7388626.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    },
+    "wezterm": {
+        "branch": "main",
+        "description": "A GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust",
+        "homepage": "https://wezfurlong.org/wezterm/",
+        "owner": "wez",
+        "repo": "wezterm",
+        "rev": "c9116830c27baf0c547a1524d33363fd5e42295a",
+        "sha256": "0bxh5hncpglvd6vrcmhpwpzgwizgnrvnsfahfkp53pswnyja1fhr",
+        "type": "tarball",
+        "url": "https://github.com/wez/wezterm/archive/c9116830c27baf0c547a1524d33363fd5e42295a.tar.gz",
+        "url_template": "https://github.com/<owner>/<repo>/archive/<rev>.tar.gz"
+    }
+}

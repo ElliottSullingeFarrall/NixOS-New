@@ -1,0 +1,24 @@
+From 3eb0c05af850d9c3212f67a6e05e404564e1c598 Mon Sep 17 00:00:00 2001
+From: ElliottSullingeFarrall <elliott.chalford@gmail.com>
+Date: Sat, 13 Jul 2024 20:35:00 +0100
+Subject: [PATCH] modified systemdunitdir
+
+---
+ meson.build | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/meson.build b/meson.build
+index 21283c3..acc0310 100644
+--- a/meson.build
++++ b/meson.build
+@@ -39,7 +39,7 @@ mandir = get_option('mandir')
+ moduledir = get_option('libdir') / meson.project_name()
+
+ systemd_deps = dependency('systemd', required: false)
+-systemdsystemunitdir = systemd_deps.get_variable('systemdsystemunitdir', default_value: get_option('libdir') / 'systemd/system')
++systemdsystemunitdir = get_option('libdir') / 'systemd/system'
+
+ #
+ # Required dependencies
+--
+2.45.2
