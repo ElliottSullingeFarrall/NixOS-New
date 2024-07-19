@@ -36,9 +36,15 @@ fi
 next_gen=$(get_gen)
 
 # Set commit message
-git commit -aq --allow-empty --ammend -m "$HOSTNAME: $prev_gen -> $next_gen"
+git commit -aq --allow-empty --amend -m "$HOSTNAME: $prev_gen -> $next_gen"
+
+# If commit fails, undo the commit and exit
+if [ $? -ne 0 ]; then
+    git reset -q HEAD~
+    exit 1
+fi
 
 # Push changes
-git push -q
+# git push -q
 
 exit 0

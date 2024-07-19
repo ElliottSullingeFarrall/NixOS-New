@@ -70,7 +70,7 @@ in
     #   icon = "vscode-insiders";
     #   noDisplay = false;
 
-    #   exec = "code %F";
+    #   exec = "boxxy code-insiders %F";
     #   type = "Application";
     #   startupNotify = true;
 
@@ -81,7 +81,7 @@ in
     #     "new-empty-window" = {
     #       name = "New Empty Window";
     #       icon = "vscode-insiders";
-    #       exec = "code --new-window %F";
+    #       exec = "boxxy code-insiders --new-window %F";
     #     };
     #   };
     # };
@@ -93,7 +93,7 @@ in
     #   icon = "vscode-insiders";
     #   noDisplay = true;
 
-    #   exec = "code --open-url %U";
+    #   exec = "boxxy code-insiders --open-url %U";
     #   type = "Application";
     #   startupNotify = true;
 
@@ -106,7 +106,8 @@ in
     /* -------------------------------------------------------------------------- */
 
     home.activation = {
-      linkVscode = lib.internal.mkLinkScript "${config.xdg.dataHome}/vscode-insiders" "${config.home.homeDirectory}/.vscode-insiders";
+      linkVscode = lib.internal.mkLinkScript "${config.xdg.dataHome}/vscode" "${config.home.homeDirectory}/.vscode";
+      linkVscodeInsiders = lib.internal.mkLinkScript "${config.xdg.dataHome}/vscode-insiders" "${config.home.homeDirectory}/.vscode-insiders";
       linkPki = lib.internal.mkLinkScript "${config.xdg.dataHome}/pki" "${config.home.homeDirectory}/.pki";
     };
 
@@ -114,7 +115,7 @@ in
     /*                                  Defaults                                  */
     /* -------------------------------------------------------------------------- */
 
-    xdg.mimeApps.defaultApplications = (builtins.listToAttrs (map (type: { name = type; value = "code-insiders.desktop"; }) [
+    xdg.mimeApps.defaultApplications = (builtins.listToAttrs (map (type: { name = type; value = "code.desktop"; }) [
       "text/plain"
       "text/html"
       "text/css"
@@ -133,7 +134,7 @@ in
       "application/x-java"
       "application/sql"
     ])) // {
-      "application/x-desktop" = "code-insiders-url-handler.desktop";
+      "application/x-desktop" = "code-url-handler.desktop";
     };
 
     /* -------------------------------------------------------------------------- */
@@ -142,6 +143,7 @@ in
 
     programs.waybar.settings.mainBar."hyprland/workspaces".window-rewrite = lib.mkIf config.programs.waybar.enable {
       "code" = "󰨞";
+      "code-insiders" = "󰨞";
     };
   };
 }
