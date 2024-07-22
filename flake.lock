@@ -40,11 +40,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1721252987,
-        "narHash": "sha256-9r9dEMn19KYQ/PZWRfj7BRMLBR8hREfP3c5LRZAIU58=",
+        "lastModified": 1721636867,
+        "narHash": "sha256-QN0PWBAFEfd87oWYLeMyThOZqFBHYjXsWw99wHjtjA8=",
         "owner": "ElliottSullingeFarrall",
         "repo": "catnerd",
-        "rev": "1d782e6dbc6ccdaeea7c3393e20b9bb7af6d821d",
+        "rev": "9e488bc004ab80ea6b5e84caa003d6b224cf9065",
         "type": "github"
       },
       "original": {

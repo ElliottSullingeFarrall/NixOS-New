@@ -23,6 +23,6 @@ in
   };
 
   config = {
-    home.sessionVariables.TERMINAL = "${pkgs.${default}}.bin.${default}";
+    home.sessionVariables.TERMINAL = "${pkgs.${default}}/bin/${default}";
   };
 }

@@ -246,6 +246,7 @@ in
           on-click-right = "${pkgs.writeShellScript "restart" ''
             systemctl --system --failed --output json | ${pkgs.jq}/bin/jq -r '.[].unit' | ${pkgs.findutils}/bin/xargs -r systemctl --system restart
             systemctl --user   --failed --output json | ${pkgs.jq}/bin/jq -r '.[].unit' | ${pkgs.findutils}/bin/xargs -r systemctl --user restart
+            systemctl --user restart waybar.service # TODO: Must be a better way to do this
           ''}";
         };
 
