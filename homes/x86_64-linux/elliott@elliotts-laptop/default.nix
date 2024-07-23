@@ -1,12 +1,12 @@
 { osConfig
 , config
+, pkgs
 , ...
 }:
 
 {
   imports = [
     ./config
-    ./scripts
   ];
 
   xdg.enable = true;
@@ -52,6 +52,10 @@
     vscode.enable = true;
     zotero.enable = true;
   };
+
+  home.packages = with pkgs; [
+    internal.window-status
+  ];
 
   /* ----------------------------- Personalisation ---------------------------- */
 

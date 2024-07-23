@@ -16,16 +16,11 @@ charset = utf-8
 indent_style = space
 indent_size = 2
 
-# Match c++/shell/perl, set indent to spaces with width of four
-[*.{hpp,cc,hh,sh,pl,xs}]
-indent_style = space
-indent_size = 4
-
-# Match diffs, avoid to trim trailing whitespace
-[*.{diff,patch}]
-trim_trailing_whitespace = false
-
 # Exclude rules for age files
 [*.age]
 end_of_line = unset
 insert_final_newline = unset
+
+# Match diffs, avoid to trim trailing whitespace
+[*.{diff,patch}]
+trim_trailing_whitespace = false
