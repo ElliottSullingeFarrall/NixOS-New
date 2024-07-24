@@ -6,13 +6,13 @@ HOSTNAME=$(hostname)
 # --------------------------------- Functions -------------------------------- #
 
 revert() {
-    git reset -q --hard "$rev"
-    git stash pop -q
-    exit 1
+	git reset -q --hard "$rev"
+	git stash pop -q
+	exit 1
 }
 
 get_gen() {
-    sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | awk '/current/ {print $1}'
+	sudo nix-env --list-generations --profile /nix/var/nix/profiles/system | awk '/current/ {print $1}'
 }
 
 # ---------------------------------- Script ---------------------------------- #
@@ -20,6 +20,7 @@ get_gen() {
 # Stash repo
 rev=$(git rev-parse HEAD)
 git stash push -q --keep-index
+git stash apply -q
 trap 'revert' ERR
 
 # Lock flake inputs
@@ -40,4 +41,5 @@ git commit -aq --allow-empty --amend -m "$HOSTNAME: $prev_gen -> $next_gen"
 # Push changes
 # git push -q
 
+git stash drop -q
 exit 0
