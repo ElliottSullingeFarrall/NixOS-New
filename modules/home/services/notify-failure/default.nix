@@ -5,76 +5,117 @@
 }:
 
 let
-  cfg = config.services.notify-failure;
+  cfg = config.services.systemd-notifications;
   inherit (cfg) enable;
+
+  state_system = "/var/tmp/systemd_system_state.json";
+  state_user = "/var/tmp/systemd_user_state.json";
 in
 {
   options = {
-    services.notify-failure.enable = lib.mkEnableOption "notifications for failed services";
+    services.systemd-notifications.enable = lib.mkEnableOption "notifications for failed services";
   };
 
   config = lib.mkIf enable {
-    systemd.user.services.notify-failure = {
+    systemd.user.services.systemd-notifications = {
       Unit = {
         Description = "Check systemd service statuses and notify on changes";
       };
       Service = {
         Type = "simple";
-        ExecStartPre = "${pkgs.coreutils}/bin/touch /var/tmp/systemd_user_state.json";
-        ExecStart = pkgs.writeShellScript "notify-failure" /*sh*/''
-          state_file="/var/tmp/systemd_user_state.json"
+        ExecStartPre = [
+          "${pkgs.coreutils}/bin/rm -f ${state_system}"
+          "${pkgs.coreutils}/bin/rm -f ${state_user}"
+          "${pkgs.coreutils}/bin/touch ${state_system}"
+          "${pkgs.coreutils}/bin/touch ${state_user}"
+        ];
+        ExecStart = pkgs.writeShellScript "systemd-notifications" /*sh*/''
+          init_system() {
+            systemd_state=$(systemctl --system --output=json)
 
-          init() {
-            systemd_state=$(systemctl --user --type=service --state=failed,active --output=json)
+            echo "$systemd_state" | ${pkgs.jq}/bin/jq -c '.[]' | while read -r service; do
+              unit=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.unit')
+              curr_state=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.active')
 
-            echo "$systemd_state" | ${pkgs.jq}/bin/jq -c '.[]' | while read -r unit; do
-                service=$(echo "$unit" | ${pkgs.jq}/bin/jq -r '.unit')
-                curr_state=$(echo "$unit" | ${pkgs.jq}/bin/jq -r '.active')
+              if [[ "$curr_state" == "failed" ]]; then
+                ${pkgs.libnotify}/bin/notify-send "Service Failed" "$unit has failed."
+              fi
+            done
 
-                if [[ "$curr_state" == "failed" ]]; then
-                  ${pkgs.libnotify}/bin/notify-send "Service Failed" "$service has failed."
-                fi
-              done
+            echo "$systemd_state" | ${pkgs.jq}/bin/jq > "${state_system}"
+          }
+          init_user() {
+            systemd_state=$(systemctl --user --output=json)
 
-            echo "$systemd_state" | ${pkgs.jq}/bin/jq . > "$state_file"
+            echo "$systemd_state" | ${pkgs.jq}/bin/jq -c '.[]' | while read -r service; do
+              unit=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.unit')
+              curr_state=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.active')
+
+              if [[ "$curr_state" == "failed" ]]; then
+                ${pkgs.libnotify}/bin/notify-send "Service Failed" "$unit has failed."
+              fi
+            done
+
+            echo "$systemd_state" | ${pkgs.jq}/bin/jq > "${state_user}"
           }
 
-          check() {
-            while true; do
-              systemd_state=$(systemctl --user --type=service --state=failed,active --output=json)
+          check_system() {
+            systemd_state=$(systemctl --system --output=json)
 
-              echo "$systemd_state" | ${pkgs.jq}/bin/jq -c '.[]' | while read -r unit; do
-                service=$(echo "$unit" | ${pkgs.jq}/bin/jq -r '.unit')
-                curr_state=$(echo "$unit" | ${pkgs.jq}/bin/jq -r '.active')
-                prev_state=$(${pkgs.coreutils}/bin/cat "$state_file" | ${pkgs.jq}/bin/jq -r "(map(select(.unit == \"$service\")) | .[0].active)")
+            echo "$systemd_state" | ${pkgs.jq}/bin/jq -c '.[]' | while read -r service; do
+              unit=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.unit')
+              curr_state=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.active')
+              prev_state=$(${pkgs.jq}/bin/jq -r --arg unit "$unit" '.[] | select(.unit==$unit) | .active' "${state_system}")
 
-                if [[ "$prev_state" != "$curr_state" ]]; then
-                  if [[ "$curr_state" == "active" ]]; then
-                    ${pkgs.libnotify}/bin/notify-send "Service Started" "$service has started successfully."
-                  elif [[ "$curr_state" == "failed" ]]; then
-                    ${pkgs.libnotify}/bin/notify-send "Service Failed" "$service has failed."
-                  fi
+              if [[ "$prev_state" != "$curr_state" ]]; then
+                if [[ "$curr_state" == "active" ]]; then
+                  ${pkgs.libnotify}/bin/notify-send "Service Started" "$unit has started successfully."
+                elif [[ "$curr_state" == "failed" ]]; then
+                  ${pkgs.libnotify}/bin/notify-send "Service Failed" "$unit has failed."
                 fi
-              done
+              fi
 
-              echo "$systemd_state" | ${pkgs.jq}/bin/jq . > "$state_file"
+              echo "$systemd_state" | ${pkgs.jq}/bin/jq > "${state_system}"
+            done
+          }
+          check_user() {
+            systemd_state=$(systemctl --user --output=json)
+
+            echo "$systemd_state" | ${pkgs.jq}/bin/jq -c '.[]' | while read -r service; do
+              unit=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.unit')
+              curr_state=$(echo "$service" | ${pkgs.jq}/bin/jq -r '.active')
+              prev_state=$(${pkgs.jq}/bin/jq -r --arg unit "$unit" '.[] | select(.unit==$unit) | .active' "${state_user}")
+
+              if [[ "$prev_state" != "$curr_state" ]]; then
+                if [[ "$curr_state" == "active" ]]; then
+                  ${pkgs.libnotify}/bin/notify-send "Service Started" "$unit has started successfully."
+                elif [[ "$curr_state" == "failed" ]]; then
+                  ${pkgs.libnotify}/bin/notify-send "Service Failed" "$unit has failed."
+                fi
+              fi
+
+              echo "$systemd_state" | ${pkgs.jq}/bin/jq > "${state_user}"
             done
           }
 
-          # Run initial pass and then start monitoring
-          init
-          sleep 10
+          init_system
+          init_user
+
           while true; do
-            check
             sleep 10
+            check_system
+            check_user
           done
         '';
-        ExecStop = "${pkgs.coreutils}/bin/rm /var/tmp/systemd_user_state.json";
+        ExecStop = [
+          "${pkgs.coreutils}/bin/rm ${state_system}"
+          "${pkgs.coreutils}/bin/rm ${state_user}"
+        ];
         Restart = "on-failure";
         RestartSec = 5;
       };
       Install = {
-        WantedBy = [ "default.target" ];
+        WantedBy = [ "graphical-session.target" ];
       };
     };
   };

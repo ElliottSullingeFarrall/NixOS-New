@@ -61,7 +61,7 @@
 
   services = {
     test.enable = true;
-    notify-failure.enable = true;
+    systemd-notifications.enable = true;
   };
 
   /* ----------------------------- Personalisation ---------------------------- */
