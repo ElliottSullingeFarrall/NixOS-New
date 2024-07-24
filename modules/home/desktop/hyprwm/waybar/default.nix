@@ -205,7 +205,7 @@ in
           orientation = "inherit";
           modules = [
             "group/logout"
-            "systemd-failed-units"
+            # "systemd-failed-units"
             "custom/notification"
           ];
         };

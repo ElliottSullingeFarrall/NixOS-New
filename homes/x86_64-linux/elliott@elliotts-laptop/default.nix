@@ -57,6 +57,13 @@
     internal.window-status
   ];
 
+  /* -------------------------------- Services -------------------------------- */
+
+  services = {
+    test.enable = true;
+    notify-failure.enable = true;
+  };
+
   /* ----------------------------- Personalisation ---------------------------- */
 
   home.sessionVariables = {

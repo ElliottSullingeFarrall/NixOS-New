@@ -19,7 +19,7 @@ get_gen() {
 
 # Stash repo
 rev=$(git rev-parse HEAD)
-git stash push -q --keep-index
+git stash push -q
 git stash apply -q
 trap 'revert' ERR
 
