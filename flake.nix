@@ -72,7 +72,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     ldz-desktop = {
-      url = "github:ElliottSullingeFarrall/ldz-desktop";
+      url = "github:ElliottSullingeFarrall/ldz-desktop/dev";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

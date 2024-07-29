@@ -441,15 +441,16 @@
         "snowfall-lib": "snowfall-lib"
       },
       "locked": {
-        "lastModified": 1722251908,
-        "narHash": "sha256-gmKUxDnJ5KwbtvmQFpWXXmmnWXdCv1nyC06Moe6ZbXM=",
+        "lastModified": 1722262527,
+        "narHash": "sha256-70MGDQS9QoPqfoDYuCELNeVFajjAfy2XvT0IdLfWt9E=",
         "owner": "ElliottSullingeFarrall",
         "repo": "ldz-desktop",
-        "rev": "5cccac101478f1d1aa42dad85c089e2968cbb3f2",
+        "rev": "a67e5d7d5965db88854a1c769d9d360d5f9ed16d",
         "type": "github"
       },
       "original": {
         "owner": "ElliottSullingeFarrall",
+        "ref": "dev",
         "repo": "ldz-desktop",
         "type": "github"
       }
