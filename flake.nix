@@ -71,8 +71,8 @@
       url = "github:iosmanthus/code-insiders-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    ldz-apps = {
-      url = "github:ElliottSullingeFarrall/LDZ-Apps/legacy";
+    ldz-desktop = {
+      url = "github:ElliottSullingeFarrall/ldz-desktop";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -92,6 +92,7 @@
         catnerd.overlays.default
         rofi-plugins.overlays.default
         code-insiders.overlays.default
+        ldz-desktop.overlays.default
       ];
 
       systems.modules.nixos = with inputs; [

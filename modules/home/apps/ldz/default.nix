@@ -1,7 +1,6 @@
-{ inputs
-, system
-, config
+{ config
 , lib
+, pkgs
 , ...
 }:
 
@@ -19,7 +18,7 @@ in
     /*                                  Packages                                  */
     /* -------------------------------------------------------------------------- */
 
-    home.packages = with inputs.ldz-apps.packages.${system}; [
+    home.packages = with pkgs.ldz; [
       ldz
     ];
   };
