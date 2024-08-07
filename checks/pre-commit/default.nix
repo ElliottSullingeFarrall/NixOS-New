@@ -15,7 +15,7 @@ lib.pre-commit-hooks.x86_64-linux.run {
     shfmt.enable = true;
     # TOML
     check-toml.enable = true;
-    taplo.enable = true;
+    # taplo.enable = true;
     # Misc
     check-added-large-files = {
       enable = true;

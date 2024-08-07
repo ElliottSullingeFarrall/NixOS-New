@@ -1,0 +1,20 @@
+{
+  "version": "2.0.0",
+  "presentation": {
+    "echo": false,
+    "showReuseMessage": false,
+    "clear": true
+  },
+  "tasks": [
+    {
+      "label": "Run ...",
+      "type": "shell",
+      "command": "poetry run <package>",
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

@@ -1,6 +1,8 @@
 .direnv/
-result/
-
 .pre-commit-config.yaml
+
+.mypy_cache/
+
+result/
 
 overlays/*/*.sh

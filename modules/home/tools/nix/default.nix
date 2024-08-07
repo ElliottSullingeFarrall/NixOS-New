@@ -15,8 +15,8 @@ in
 
   config = lib.mkIf enable {
     home.packages = with pkgs; [
+      nil
       nixd
-      nixpkgs-fmt
     ];
 
     programs.nix-index.enable = true;

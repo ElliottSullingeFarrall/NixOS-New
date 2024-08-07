@@ -6,7 +6,7 @@ HOSTNAME=$(hostname)
 # --------------------------------- Functions -------------------------------- #
 
 revert() {
-	git reset -q --hard "$rev"
+	# git reset -q --hard "$rev"
 	git stash pop -q
 	exit 1
 }

@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "<package>"
+version = "0.0.0"
+description = "..."
+license = "MIT"
+authors = ["ElliottSullingeFarrall <elliott.chalford@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/ElliottSullingeFarrall/<repo>"
+packages = [{ include = "src", to = "<package>" }]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.scripts]
+package = "src:run"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
