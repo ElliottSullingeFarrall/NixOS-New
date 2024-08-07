@@ -7,7 +7,10 @@
     actionlint.enable = true;
     beautysh.enable = true;
     deadnix.enable = true;
-    isort.enable = true;
+    isort = {
+      enable = true;
+      profile = "django";
+    };
     jsonfmt.enable = true;
     mdformat.enable = true;
     mypy.enable = true;
