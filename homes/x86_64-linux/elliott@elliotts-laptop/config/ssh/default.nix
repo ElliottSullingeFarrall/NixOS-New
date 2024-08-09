@@ -39,7 +39,7 @@
         hostname = "192.168.1.2";
         user = "root";
         identityFile = "${config.age.secrets.beanmachine.path}";
-        proxyJump = "beannet";
+        # proxyJump = "beannet";
       };
 
       reMarkable = {
